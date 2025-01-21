@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>calculator</title>
+    <style>
+        body{
+    margin: 0;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+
+}
+.container{
+    font-family: Arial,sans-serif;
+    background-color: hsl(0,0%,15%);
+    border-radius: 50px;
+    overflow: hidden;
+    max-width: 400px;
+    max-height: 800px;
+}
+#display{
+    width: 100%;
+    padding: 15px;
+    font-size: 5em;
+    color: white;
+    background-color: hsl(0,0%,20%);
+    text-align: left;
+    border: none;
+
+
+}
+button{
+    width: 60px;
+    height:60px;
+    border-radius: 50px;
+    border:none;
+    background-color: hsl(0,0%,30%);
+    color: white;
+    cursor: pointer;
+    font-size: 3em;
+    font-weight: bold;
+}
+button:hover{
+    background-color: hsl(0,0%,50%);
+}
+button:active{
+    background-color: hsl(0,0%,50%);
+}
+#keys{
+    display:grid;
+    grid-template-columns: repeat(4,1fr);
+    gap:10px;
+    padding: 50px;
+}
+.operator{
+    background-color: orange;
+}
+.operator:hover{
+    background-color: rgb(245, 160, 15);
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <input id="display" readonly>
+        <div id="keys">
+            <button onclick="appendToDisplay('+')" class="operator">+</button>
+            <button onclick="appendToDisplay('7')">7</button> 
+            <button onclick="appendToDisplay('8')">8</button> 
+            <button onclick="appendToDisplay('9')">9</button>
+            <button onclick="appendToDisplay('-')"class="operator">-</button>
+            <button onclick="appendToDisplay('4')">4</button>
+            <button onclick="appendToDisplay('5')">5</button>
+            <button onclick="appendToDisplay('6')">6</button>
+            <button onclick="appendToDisplay('*')" class="operator">*</button>
+            <button onclick="appendToDisplay('1')">1</button>
+            <button onclick="appendToDisplay('2')">2</button>
+            <button onclick="appendToDisplay('3')">3</button>
+            <button onclick="appendToDisplay('/')" class="operator">/</button>
+            <button onclick="appendToDisplay('0')">0</button>
+            <button onclick="appendToDisplay('.')">.</button>
+            <button onclick="calculate()">=</button>
+            <button onclick="clearDisplay()" class="operator">C</button>
+        </div>
+    </div>
+    <script>
+        const display1=document.getElementById("display");
+
+function appendToDisplay(input){
+    display1.value += input;
+}
+
+function calculate(){
+    try{
+    display1.value = eval(display1.value);
+    }
+    catch(error){
+        display1.value="Error"
+    }
+}
+function clearDisplay(){
+    display1.value = "";
+}
+    </script>
+</body>
+</html>
