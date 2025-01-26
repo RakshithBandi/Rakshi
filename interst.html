@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>compound interest</title>
+    <style>
+        body{
+    font-family: sans-serif;
+    background-color: hsl(0, 0%, 95%);
+}
+h1{
+    color: rgb(68, 67, 65);
+    text-align: center;
+    font-size: 2.5em;
+}
+form{
+    background-color: white;
+    max-width: 300px;
+    margin: auto;
+    padding:25px;
+    border-radius: 10px;
+    box-shadow: 5px 5px 12px hsl(0,0%,0%,0.6);
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+label{
+    font-size: 1.3em;
+    font-weight: bold;
+}
+input{
+    margin-top: 5px;
+    padding: 5px;
+    border-radius: 10px;
+    border-color: rgb(196, 193, 193);
+    text-align: center;
+
+}
+button{
+    background-color: red;
+    padding: 8px;
+    color: white;
+    font-size: 1.1em;
+    border-radius: 10px;
+    cursor: pointer;
+    border: none;
+}
+button:hover{
+    background-color: rgb(236, 122, 122);
+}
+#total{
+    font-weight: bold;
+}
+#total-amount{
+    color: rgb(119, 232, 6);
+    font-weight: bold;
+}
+    </style>
+</head>
+<body>
+    <h1>Interest Calculator</h1>
+    <form>
+        <label for="principal">Principal Amount:</label>
+        <input type="text" id="principal"><br>
+
+        <label for="rate">Interest Rate:</label>
+        <input type="number" id="rate"><br>
+
+        <label for="years">Years:</label>
+        <input type="number" id="years"><br>
+
+        <button type="button" onclick="calculate()">submit</button>
+        <p id="total">Total: <span id="total-amount">$0.00</span></p>
+
+    </form>
+    
+    <script>
+        
+function calculate(){
+
+const totalamount=document.getElementById("total-amount");
+const PricipalInput=document.getElementById("principal");
+const RateInput=document.getElementById("rate");
+const YearsInput=document.getElementById("years");
+
+let principal= Number(PricipalInput.value)
+let rate= Number(RateInput.value/100)
+let years= Number(YearsInput.value)
+
+if(principal < 0 || isNaN(principal)){
+    principal =0;
+    PricipalInput.value=0;
+}
+if(rate < 0 || isNaN(rate)){
+    rate = 0;
+    RateInput.value=0;
+}
+if(years < 0 || isNaN(years)){
+    years = 0
+    YearsInput.value=0;
+}
+const result=principal * Math.pow((1+rate/1),1*years)
+
+totalamount.textContent = result.toLocaleString(undefined,{style:"currency",currency:"USD"});
+
+}
+
+calculate()
+
+    </script>
+</body>
+</html>
