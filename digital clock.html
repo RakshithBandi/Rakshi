@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Clock</title>
+</head>
+<style>
+    body{
+       margin: 0; 
+       background-image: url(pic.png);
+       background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-attachment: fixed;
+    }
+    #container{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+    #clock{
+        align-items: center;
+        font-family: monospace;
+        font-weight: bold;
+        text-align: center;
+        color: white;
+        backdrop-filter: blur(20px);
+        background-color: rgb(105, 102, 102);
+        width: 100%;
+        padding: 20px;
+        font-size: 2.2em;
+    }
+</style>
+<body>
+    <div id="container">
+        <div id="clock">00:00:00</div>
+    </div>
+    <script>
+        function displayclock(){
+            const New = new Date();
+            let hours=New.getHours().toString().padStart(2,0);
+            const meridian = hours >=12 ?"PM" :"AM"
+            const minutes=New.getMinutes().toString().padStart(2,0);;
+            const seconds=New.getSeconds().toString().padStart(2,0);;
+            const timeString=`${hours}:${minutes}:${seconds} ${meridian}`
+            document.getElementById("clock").textContent= timeString;
+        }
+        displayclock()
+        setInterval(displayclock, 1000);
+    </script>
+</body>
+</html>
