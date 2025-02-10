@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>music player</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/983041a2a9.js" crossorigin="anonymous"></script>
+    <style>
+    *{
+        margin: 0;
+        padding: 0;
+        font-family: 'poppins',sans-serif;
+        box-sizing: border-box;
+    }
+    .container{
+        width: 100%;
+        height: 100vh;
+        background-color: hsl(210, 35%, 80%);
+        display:flex;
+        text-align: center;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    .music-player{
+        background-color: rgb(246, 226, 202);
+        width: 350px;
+        padding: 25px 35px;
+    }
+    nav{
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+    }
+    .circle{
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+        background: #343030;
+        color: aliceblue;
+        box-shadow: 0 5px 10px rgba(255,26, 26, 0,22);
+    }
+    img{
+        width: 60%;
+        height: 50%;
+        border-radius: 80%;
+        border: 8px solid #fff;
+        box-shadow: 0 10px 60px rgba(255,26, 26, 0,22);
+    }
+    .music-player h2{
+        font-size: 20px;
+        font-weight: bold;
+        color: #333;
+        margin-top: 20px;
+    }
+    .song{
+        background: transparent;
+        display: flex;
+        align-items: center;  
+        justify-content: center; 
+        margin-right: 10px;
+        width: 100%;
+    }
+    #progress{
+        -webkit-appearence:none;
+        width: 100%;
+        height: 6px;
+        background-color: #f53192;
+        border-radius: 4px;
+        cursor: pointer;
+        margin: 20px 0;
+    }
+    #progress::-webkit-slider-thumb{
+        -webkit-appearence:none;
+        background: #f5b4d5;
+        width: 30px;
+        border-radius: 50%;
+        border: 8px solid #fff;
+        box-shadow: 0 5px 5px rgba(255,26, 26, 0.22);
+    }
+    .controls{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .controls div{
+        width:60%;
+        height: 60%;
+        margin: 20px;
+        background-color: #fff;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 25%;
+        color: #f53192;
+        box-shadow: 0 10px 20px rgba(255,26, 26, 0.22);
+        cursor: pointer;
+    }
+    .controls div:nth-child(2){
+        transform: scale(1.5);
+        background: #f53192;
+        color: #fff;
+    }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="music-player">
+        <nav>
+            <div class="circle">
+                <i class="fa-solid fa-angle-left"></i>
+            </div>
+            <div class="circle">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+            </nav>
+        <img src="pic.jpg" alt="">
+        <h2>Godari Gattu</h2>
+        <p>Sankranthiki Vatunam (2025)</p>
+        <audio id="song">
+            <source src="godari gattu.mp3">
+        </audio>
+        <input type="range" value="0" id="progress">
+        <div class="controls">
+        <div><i class="fa-solid fa-backward"></i></div>
+        <div onclick="playPuase()"><i class="fa-solid fa-play" id="ctrlicon"></i></div>
+        <div><i class="fa-solid fa-forward"></i></div>
+        </div>
+        </div>
+    </div>
+
+<script>
+    let progress=document.getElementById("progress");
+    let song=document.getElementById("song");
+    let ctrlicon=document.getElementById("ctrlicon");
+
+    song.onloadedmetadata =function(){
+        progress.max = song.duration;
+        progress.value=song.currentTime;
+    }
+    function playPuase(){
+        if(ctrlicon.classList.contains("fa-pause")){
+        song.pause();
+        ctrlicon.classList.remove("fa-pause");
+        ctrlicon.classList.add("fa-play");
+        }
+    else{
+        song.play();
+        ctrlicon.classList.add("fa-pause");
+        ctrlicon.classList.remove("fa-play");
+    }
+} 
+
+if(song.play()){
+    setInterval(()=>{
+        progress.value = song.currentTime;
+    },500);
+}
+progress.onchange = function(){
+    song.play();
+    song.currentTime=progress.value;
+    ctrlicon.classList.add("fa-pause");
+    ctrlicon.classList.remove("fa-play");
+    
+}
+</script>
+</body>
+</html>
